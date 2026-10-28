@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fortim Marmitaria - Comanda Eletrônica</title>
+  <style>
+    :root {
+      --font-size-base: 15px;
+      --primary: #FFB800;
+      --primary-dark: #e0a200;
+      --secondary: #280659;
+      --accent: #004D40;
+      --bg: #f4f5f8;
+      --card-bg: #ffffff;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --btn-min-height: 48px;
+    }
+
+    body.high-contrast {
+      --primary: #ffff00;
+      --primary-dark: #cccc00;
+      --secondary: #000000;
+      --accent: #00ff00;
+      --bg: #121212;
+      --card-bg: #000000;
+      --text: #ffffff;
+      --text-muted: #cccccc;
+      --border: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: var(--font-size-base);
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 120px;
+      line-height: 1.5;
+    }
+
+    header {
+      background-color: #000000;
+      border-bottom: 4px solid var(--secondary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .accessibility-bar {
+      padding: 10px 16px;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-accessibility-top {
+      background: #FFFF00;
+      color: #000000;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 560px;
+      padding: 10px 16px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .font-size-buttons {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .btn-font-size {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 6px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-font-size.active {
+      background: var(--primary);
+      color: var(--secondary);
+      border-color: var(--primary);
+    }
+
+    .brand-banner {
+      background: var(--primary);
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 3px solid #000000;
+    }
+
+    .brand-pill {
+      background: #ffffff;
+      border-radius: 40px;
+      padding: 8px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 2px solid var(--secondary);
+    }
+
+    .brand-title-main {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-title-sub {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 2.5px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 14px auto;
+      padding: 0 12px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--secondary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    body.high-contrast .card-title {
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .btn-option {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      color: var(--text);
+      padding: 12px 8px;
+      border-radius: 10px;
+      min-height: var(--btn-min-height);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .btn-option.selected {
+      background: var(--secondary);
+      color: #ffffff;
+      border-color: var(--secondary);
+    }
+
+    body.high-contrast .btn-option.selected {
+      background: var(--primary);
+      color: #000000;
+      border-color: var(--primary);
+    }
+
+    .btn-option .price {
+      font-size: 0.8rem;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    .locked-section {
+      position: relative;
+    }
+
+    .locked-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(240, 240, 240, 0.95);
+      z-index: 5;
+      cursor: pointer;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--secondary);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.95rem;
+    }
+
+    body.high-contrast .locked-overlay {
+      background: rgba(0, 0, 0, 0.95);
+      color: var(--primary);
+    }
+
+    .item-counter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .item-counter-row:last-child {
+      border-bottom: none;
+    }
+
+    .counter-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-counter {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--secondary);
+      background: #ffffff;
+      color: var(--secondary);
+      font-weight: bold;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .counter-value {
+      font-weight: bold;
+      font-size: 1.15rem;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .conditional-panel {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(255, 184, 0, 0.12);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-dark);
+    }
+
+    .conditional-panel.active {
+      display: block;
+    }
+
+    .dynamic-item-card {
+      background: rgba(0,0,0,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 70px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: none;
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--card-bg);
+      border-top: 2px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 50;
+    }
+
+    .total-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .total-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+
+    .total-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      min-height: var(--btn-min-height);
+      box-shadow: 0 4px 10px rgba(0,77,64,0.3);
+    }
+
+    .btn-submit:disabled {
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .toast {
+      position: fixed;
+      top: 170px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #dc3545;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 200;
+      display: none;
+      text-align: center;
+      max-width: 85%;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 12px;
+    }
+
+    .modal-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      max-height: 90vh;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: var(--secondary);
+      color: white;
+      padding: 14px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      background: #f4f4f4;
+      flex: 1;
+    }
+
+    .receipt {
+      background: #ffffff;
+      padding: 16px;
+      border: 1px dashed #ccc;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      color: #000000;
+      line-height: 1.4;
+    }
+
+    .receipt-header {
+      text-align: center;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed #000;
+      padding-bottom: 8px;
+    }
+
+    .receipt-divider {
+      border-bottom: 1px dashed #000;
+      margin: 8px 0;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .receipt-total {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 8px;
+      border-top: 1px solid #000;
+      padding-top: 4px;
+    }
+
+    .modal-footer {
+      padding: 12px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-modal {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-modal-print {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-modal-confirm {
+      background: var(--accent);
+      color: white;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      .receipt, .receipt * { visibility: visible; }
+      .receipt { position: absolute; left: 0; top: 0; width: 80mm; border: none; }
+    }
+
+    .pulse {
+      animation: pulse-anim 0.6s ease-in-out 2;
+    }
+
+    @keyframes pulse-anim {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="accessibility-bar">
+      <button type="button" class="btn-accessibility-top" onclick="toggleContrast()">
+        ♿ Modo Acessibilidade / Alto Contraste
+      </button>
+
+      <div class="font-size-buttons">
+        <button type="button" class="btn-font-size" onclick="setFontSize(13, this)">🔤 Pequena</button>
+        <button type="button" class="btn-font-size active" onclick="setFontSize(15, this)">🔤 Média</button>
+        <button type="button" class="btn-font-size" onclick="setFontSize(18, this)">🔤 Grande</button>
+      </div>
+    </div>
+
+    <div class="brand-banner">
+      <div class="brand-pill">
+        <div class="brand-title-main">FORTIM</div>
+        <div class="brand-title-sub">MARMITARIA</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast" id="toast">⚠️ Por favor, selecione primeiro o tamanho da marmita!</div>
+
+  <main>
+    <div class="card" id="step-1">
+      <div class="card-title">📍 1. Local / Atendimento</div>
+      <div class="grid">
+        <button type="button" class="btn-option selected" onclick="selectOption('local', 'Mesa 01', this)">🍽️ Mesa 01</button>
+        <button type="button" class="btn-option" onclick="selectOption('local', 'Mesa 02', this)">🍽️ Mesa 02</button>
+        <button type="button" class="btn-option" onclick="selectOption('local', 'Balcão', this)">🏪 Balcão</button>
+        <button type="button" class="btn-option" onclick="selectOption('local', 'Entrega', this)">🛵 Entrega</button>
+      </div>
+    </div>
+
+    <div class="card" id="step-2">
+      <div class="card-title">🍱 2. Tamanho da Marmita</div>
+      <div class="grid">
+        <button type="button" class="btn-option" onclick="selectSize('P', 15.00, 2, this)">
+          <span>📦 Marmita P</span>
+          <span class="price">R$ 15,00 (2 ac.)</span>
+        </button>
+        <button type="button" class="btn-option" onclick="selectSize('M', 16.00, 3, this)">
+          <span>📦 Marmita M</span>
+          <span class="price">R$ 16,00 (3 ac.)</span>
+        </button>
+        <button type="button" class="btn-option" onclick="selectSize('G', 17.00, 4, this)" style="grid-column: span 2;">
+          <span>📦 Marmita G</span>
+          <span class="price">R$ 17,00 (4 ac.)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card" id="step-3">
+      <div class="card-title">🥩 3. Opção de Mistura</div>
+      <div class="grid">
+        <button type="button" class="btn-option" onclick="selectProtein('Frango', this)">🍗 Frango</button>
+        <button type="button" class="btn-option" onclick="selectProtein('Carne', this)">🥩 Carne</button>
+        <button type="button" class="btn-option" onclick="selectProtein('Peixe', this)" style="grid-column: span 2;">🐟 Peixe</button>
+      </div>
+
+      <div class="conditional-panel" id="ponto-carne-panel">
+        <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.85rem; color: var(--secondary);">🔥 PONTO DA CARNE:</div>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+          <button type="button" class="btn-option selected" onclick="selectMeatDoneness('Mal passado', this)">🔴 Mal passado</button>
+          <button type="button" class="btn-option" onclick="selectMeatDoneness('Ao ponto', this)">🟡 Ao ponto</button>
+          <button type="button" class="btn-option" onclick="selectMeatDoneness('Bem passado', this)">🟤 Bem passado</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card locked-section" id="step-4">
+      <div class="locked-overlay" id="locked-overlay" onclick="handleLockedClick()">
+        🔒 Selecione o tamanho da marmita no Passo 2 primeiro
+      </div>
+      <div class="card-title">
+        <span>🍚 4. Acompanhamentos Padrão</span>
+        <span id="quota-badge" style="font-size: 0.8rem; color: var(--text-muted);">Porções: 0/0</span>
+      </div>
+
+      <div id="side-dishes-list">
+        <div class="item-counter-row">
+          <span style="font-weight:600;">🍚 Arroz</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSideDish('Arroz', -1)">-</button>
+            <span class="counter-value" id="count-Arroz">0</span>
+            <button type="button" class="btn-counter" onclick="changeSideDish('Arroz', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-weight:600;">🍲 Feijão</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSideDish('Feijão', -1)">-</button>
+            <span class="counter-value" id="count-Feijão">0</span>
+            <button type="button" class="btn-counter" onclick="changeSideDish('Feijão', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-weight:600;">🍝 Macarrão</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSideDish('Macarrão', -1)">-</button>
+            <span class="counter-value" id="count-Macarrão">0</span>
+            <button type="button" class="btn-counter" onclick="changeSideDish('Macarrão', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-weight:600;">🥗 Salada</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSideDish('Salada', -1)">-</button>
+            <span class="counter-value" id="count-Salada">0</span>
+            <button type="button" class="btn-counter" onclick="changeSideDish('Salada', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-weight:600;">🌾 Farofa</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSideDish('Farofa', -1)">-</button>
+            <span class="counter-value" id="count-Farofa">0</span>
+            <button type="button" class="btn-counter" onclick="changeSideDish('Farofa', 1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px;">
+        <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; color: var(--secondary);">🍟 EXTRAS & PORÇÕES POR FORA:</div>
+        
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🍟 Batata Frita (+ R$ 5,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Batata Frita', -1)">-</button>
+            <span class="counter-value" id="count-extra-Batata">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Batata Frita', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🍳 Ovo Frito (+ R$ 2,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Ovo Frito', -1)">-</button>
+            <span class="counter-value" id="count-extra-Ovo">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Ovo Frito', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🍚 Porção de Arroz Extra (+ R$ 4,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Arroz', -1)">-</button>
+            <span class="counter-value" id="count-extra-Porção Arroz">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Arroz', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🍲 Porção de Feijão Extra (+ R$ 4,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Feijão', -1)">-</button>
+            <span class="counter-value" id="count-extra-Porção Feijão">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Feijão', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🍝 Porção de Macarrão Extra (+ R$ 4,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Macarrão', -1)">-</button>
+            <span class="counter-value" id="count-extra-Porção Macarrão">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Macarrão', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🥗 Porção de Salada Extra (+ R$ 4,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Salada', -1)">-</button>
+            <span class="counter-value" id="count-extra-Porção Salada">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Salada', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🌾 Porção de Farofa Extra (+ R$ 3,00)</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Farofa', -1)">-</button>
+            <span class="counter-value" id="count-extra-Porção Farofa">0</span>
+            <button type="button" class="btn-counter" onclick="changeExtra('Porção Farofa', 1)">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" id="step-5">
+      <div class="card-title">🥤 5. Bebidas</div>
+
+      <div style="margin-bottom: 16px;">
+        <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; color: var(--secondary);">🧃 SUCOS NATURAIS (R$ 6,00 Copo | R$ 14,00 Jarra):</div>
+        
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🥤 Copo 400ml</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeJuice('Copo', -1)">-</button>
+            <span class="counter-value" id="count-juice-Copo">0</span>
+            <button type="button" class="btn-counter" onclick="changeJuice('Copo', 1)">+</button>
+          </div>
+        </div>
+
+        <div id="juices-copo-container"></div>
+
+        <div class="item-counter-row" style="margin-top: 10px;">
+          <span style="font-size:0.9rem; font-weight:600;">🏺 Jarra 1L</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeJuice('Jarra', -1)">-</button>
+            <span class="counter-value" id="count-juice-Jarra">0</span>
+            <button type="button" class="btn-counter" onclick="changeJuice('Jarra', 1)">+</button>
+          </div>
+        </div>
+
+        <div id="juices-jarra-container"></div>
+      </div>
+
+      <div>
+        <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; color: var(--secondary);">🥤 REFRIGERANTES (R$ 6,00 Lata | R$ 10,00 1L):</div>
+        
+        <div class="item-counter-row">
+          <span style="font-size:0.9rem; font-weight:600;">🥫 Lata 350ml</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSoda('Lata', -1)">-</button>
+            <span class="counter-value" id="count-soda-Lata">0</span>
+            <button type="button" class="btn-counter" onclick="changeSoda('Lata', 1)">+</button>
+          </div>
+        </div>
+
+        <div id="sodas-lata-container"></div>
+
+        <div class="item-counter-row" style="margin-top: 10px;">
+          <span style="font-size:0.9rem; font-weight:600;">🍾 1 Litro</span>
+          <div class="counter-controls">
+            <button type="button" class="btn-counter" onclick="changeSoda('Litro', -1)">-</button>
+            <span class="counter-value" id="count-soda-Litro">0</span>
+            <button type="button" class="btn-counter" onclick="changeSoda('Litro', 1)">+</button>
+          </div>
+        </div>
+
+        <div id="sodas-litro-container"></div>
+      </div>
+    </div>
+
+    <div class="card" id="step-6">
+      <div class="card-title">📝 6. Observações do Pedido</div>
+      <textarea id="obs-input" placeholder="Ex: Caprichar no molho, mandar talher descartável..."></textarea>
+    </div>
+  </main>
+
+  <div class="bottom-bar">
+    <div class="total-info">
+      <span class="total-label">TOTAL DO PEDIDO</span>
+      <span class="total-value" id="total-price">R$ 0,00</span>
+    </div>
+    <button type="button" class="btn-submit" id="btn-submit" disabled onclick="openReceiptModal()">
+      <span>ENVIAR PEDIDO</span> ➔
+    </button>
+  </div>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">📄 Comanda de Produção Térmica</div>
+      <div class="modal-body">
+        <div class="receipt" id="receipt-content"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-modal btn-modal-print" onclick="window.print()">🖨️ Imprimir na Impressora Térmica</button>
+        <button type="button" class="btn-modal btn-modal-confirm" onclick="confirmAndReset()">✅ Confirmar & Novo Pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let orderNum = 1;
+    let availableFlavors = ['Manga', 'Maracujá', 'Laranja', 'Acerola', 'Goiaba', 'Limão', 'Caju'];
+    let availableSugars = ['Com Açúcar', 'Sem Açúcar', 'Adoçante'];
+    let availableBrands = ['Coca-Cola', 'Coca Zero', 'Guaraná', 'Fanta', 'Sprite'];
+
+    let order = {
+      local: 'Mesa 01',
+      size: null,
+      sizePrice: 0,
+      quota: 0,
+      protein: null,
+      meatDoneness: 'Mal passado',
+      sides: { 'Arroz': 0, 'Feijão': 0, 'Macarrão': 0, 'Salada': 0, 'Farofa': 0 },
+      extras: { 
+        'Batata Frita': 0, 
+        'Ovo Frito': 0,
+        'Porção Arroz': 0,
+        'Porção Feijão': 0,
+        'Porção Macarrão': 0,
+        'Porção Salada': 0,
+        'Porção Farofa': 0
+      },
+      juices: { Copo: [], Jarra: [] },
+      sodas: { Lata: [], Litro: [] },
+      obs: ''
+    };
+
+    function setFontSize(px, el) {
+      document.documentElement.style.setProperty('--font-size-base', px + 'px');
+      el.parentElement.querySelectorAll('.btn-font-size').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+    }
+
+    function selectOption(category, value, el) {
+      order[category] = value;
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      validateForm();
+    }
+
+    function selectSize(size, price, quota, el) {
+      order.size = size;
+      order.sizePrice = price;
+      order.quota = quota;
+
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+
+      const step4 = document.getElementById('step-4');
+      step4.classList.remove('locked-section');
+      const overlay = document.getElementById('locked-overlay');
+      if (overlay) overlay.style.display = 'none';
+
+      adjustSidesToQuota();
+      updateQuotaUI();
+      updateTotal();
+      validateForm();
+    }
+
+    function handleLockedClick() {
+      showToast('⚠️ Por favor, selecione primeiro o tamanho da marmita!');
+      const step2 = document.getElementById('step-2');
+      step2.classList.add('pulse');
+      setTimeout(() => step2.classList.remove('pulse'), 1200);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+
+    function selectProtein(protein, el) {
+      order.protein = protein;
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+
+      const panel = document.getElementById('ponto-carne-panel');
+      if (protein === 'Carne') {
+        panel.classList.add('active');
+      } else {
+        panel.classList.remove('active');
+      }
+      validateForm();
+    }
+
+    function selectMeatDoneness(doneness, el) {
+      order.meatDoneness = doneness;
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function changeSideDish(item, delta) {
+      if (!order.size) return;
+      const currentTotal = Object.values(order.sides).reduce((a, b) => a + b, 0);
+      
+      if (delta > 0 && currentTotal >= order.quota) {
+        showToast(`⚠️ Limite de ${order.quota} porções atingido para a Marmita ${order.size}! Peça por fora nas opções extras.`);
+        return;
+      }
+
+      if (order.sides[item] + delta >= 0) {
+        order.sides[item] += delta;
+        document.getElementById(`count-${item}`).innerText = order.sides[item];
+        updateQuotaUI();
+      }
+    }
+
+    function adjustSidesToQuota() {
+      let currentTotal = Object.values(order.sides).reduce((a, b) => a + b, 0);
+      while (currentTotal > order.quota) {
+        for (let item in order.sides) {
+          if (order.sides[item] > 0) {
+            order.sides[item]--;
+            document.getElementById(`count-${item}`).innerText = order.sides[item];
+            currentTotal--;
+            if (currentTotal <= order.quota) break;
+          }
+        }
+      }
+    }
+
+    function updateQuotaUI() {
+      const currentTotal = Object.values(order.sides).reduce((a, b) => a + b, 0);
+      document.getElementById('quota-badge').innerText = `Porções: ${currentTotal}/${order.quota}`;
+    }
+
+    function changeExtra(item, delta) {
+      if (order.extras[item] + delta >= 0) {
+        order.extras[item] += delta;
+        let idKey = item;
+        if (item === 'Batata Frita') idKey = 'Batata';
+        if (item === 'Ovo Frito') idKey = 'Ovo';
+        document.getElementById(`count-extra-${idKey}`).innerText = order.extras[item];
+        updateTotal();
+      }
+    }
+
+    function changeJuice(type, delta) {
+      if (delta > 0) {
+        order.juices[type].push({ flavor: 'Manga', sugar: 'Com Açúcar' });
+      } else if (delta < 0 && order.juices[type].length > 0) {
+        order.juices[type].pop();
+      }
+      document.getElementById(`count-juice-${type}`).innerText = order.juices[type].length;
+      renderJuiceBuilders(type);
+      updateTotal();
+    }
+
+    function renderJuiceBuilders(type) {
+      const containerId = type === 'Copo' ? 'juices-copo-container' : 'juices-jarra-container';
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      order.juices[type].forEach((juice, index) => {
+        let card = document.createElement('div');
+        card.className = 'dynamic-item-card';
+
+        let flavorHTML = `<div style="font-size:0.8rem; font-weight:bold; margin-bottom:4px; color:var(--secondary);">Sabor do ${type} #${index + 1}:</div><div style="display:flex; gap:4px; flex-wrap:wrap; margin-bottom:6px;">`;
+        availableFlavors.forEach(f => {
+          let active = juice.flavor === f ? 'selected' : '';
+          flavorHTML += `<button type="button" class="btn-option ${active}" style="padding:6px; font-size:0.8rem; flex:1; min-height:36px;" onclick="setJuiceProp('${type}', ${index}, 'flavor', '${f}', this)">${f}</button>`;
+        });
+        flavorHTML += `</div>`;
+
+        let sugarHTML = `<div style="font-size:0.8rem; font-weight:bold; margin-bottom:4px; color:var(--secondary);">Açúcar:</div><div style="display:flex; gap:4px; flex-wrap:wrap;">`;
+        availableSugars.forEach(s => {
+          let active = juice.sugar === s ? 'selected' : '';
+          sugarHTML += `<button type="button" class="btn-option ${active}" style="padding:6px; font-size:0.8rem; flex:1; min-height:36px;" onclick="setJuiceProp('${type}', ${index}, 'sugar', '${s}', this)">${s}</button>`;
+        });
+        sugarHTML += `</div>`;
+
+        card.innerHTML = flavorHTML + sugarHTML;
+        container.appendChild(card);
+      });
+    }
+
+    function setJuiceProp(type, index, prop, val, el) {
+      order.juices[type][index][prop] = val;
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function changeSoda(type, delta) {
+      if (delta > 0) {
+        order.sodas[type].push({ brand: 'Coca-Cola' });
+      } else if (delta < 0 && order.sodas[type].length > 0) {
+        order.sodas[type].pop();
+      }
+      document.getElementById(`count-soda-${type}`).innerText = order.sodas[type].length;
+      renderSodaBuilders(type);
+      updateTotal();
+    }
+
+    function renderSodaBuilders(type) {
+      const containerId = type === 'Lata' ? 'sodas-lata-container' : 'sodas-litro-container';
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      order.sodas[type].forEach((soda, index) => {
+        let card = document.createElement('div');
+        card.className = 'dynamic-item-card';
+
+        let brandHTML = `<div style="font-size:0.8rem; font-weight:bold; margin-bottom:4px; color:var(--secondary);">Marca do Refri ${type} #${index + 1}:</div><div style="display:flex; gap:4px; flex-wrap:wrap;">`;
+        availableBrands.forEach(b => {
+          let active = soda.brand === b ? 'selected' : '';
+          brandHTML += `<button type="button" class="btn-option ${active}" style="padding:6px; font-size:0.8rem; flex:1; min-height:36px;" onclick="setSodaProp('${type}', ${index}, '${b}', this)">${b}</button>`;
+        });
+        brandHTML += `</div>`;
+
+        card.innerHTML = brandHTML;
+        container.appendChild(card);
+      });
+    }
+
+    function setSodaProp(type, index, brand, el) {
+      order.sodas[type][index].brand = brand;
+      el.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function calculateTotal() {
+      let total = order.sizePrice;
+      total += (order.extras['Batata Frita'] * 5.00);
+      total += (order.extras['Ovo Frito'] * 2.00);
+      total += (order.extras['Porção Arroz'] * 4.00);
+      total += (order.extras['Porção Feijão'] * 4.00);
+      total += (order.extras['Porção Macarrão'] * 4.00);
+      total += (order.extras['Porção Salada'] * 4.00);
+      total += (order.extras['Porção Farofa'] * 3.00);
+      total += (order.juices.Copo.length * 6.00);
+      total += (order.juices.Jarra.length * 14.00);
+      total += (order.sodas.Lata.length * 6.00);
+      total += (order.sodas.Litro.length * 10.00);
+      return total;
+    }
+
+    function updateTotal() {
+      const total = calculateTotal();
+      document.getElementById('total-price').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function validateForm() {
+      const isValid = order.local && order.size && order.protein;
+      document.getElementById('btn-submit').disabled = !isValid;
+    }
+
+    function openReceiptModal() {
+      order.obs = document.getElementById('obs-input').value.trim();
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+
+      let sidesHTML = '';
+      for (let item in order.sides) {
+        if (order.sides[item] > 0) sidesHTML += `<div> • ${order.sides[item]}x ${item}</div>`;
+      }
+      if (!sidesHTML) sidesHTML = '<div> • Nenhum acompanhamento</div>';
+
+      let extrasHTML = '';
+      if (order.extras['Batata Frita'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Batata Frita']}x Batata Frita</span><span>R$ ${(order.extras['Batata Frita'] * 5).toFixed(2)}</span></div>`;
+      if (order.extras['Ovo Frito'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Ovo Frito']}x Ovo Frito</span><span>R$ ${(order.extras['Ovo Frito'] * 2).toFixed(2)}</span></div>`;
+      if (order.extras['Porção Arroz'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Porção Arroz']}x Porção Arroz</span><span>R$ ${(order.extras['Porção Arroz'] * 4).toFixed(2)}</span></div>`;
+      if (order.extras['Porção Feijão'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Porção Feijão']}x Porção Feijão</span><span>R$ ${(order.extras['Porção Feijão'] * 4).toFixed(2)}</span></div>`;
+      if (order.extras['Porção Macarrão'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Porção Macarrão']}x Porção Macarrão</span><span>R$ ${(order.extras['Porção Macarrão'] * 4).toFixed(2)}</span></div>`;
+      if (order.extras['Porção Salada'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Porção Salada']}x Porção Salada</span><span>R$ ${(order.extras['Porção Salada'] * 4).toFixed(2)}</span></div>`;
+      if (order.extras['Porção Farofa'] > 0) extrasHTML += `<div class="receipt-row"><span> + ${order.extras['Porção Farofa']}x Porção Farofa</span><span>R$ ${(order.extras['Porção Farofa'] * 3).toFixed(2)}</span></div>`;
+
+      let drinksHTML = '';
+      if (order.juices.Copo.length > 0 || order.juices.Jarra.length > 0 || order.sodas.Lata.length > 0 || order.sodas.Litro.length > 0) {
+        drinksHTML += `<div><strong>BEBIDAS:</strong></div>`;
+        
+        order.juices.Copo.forEach((j) => {
+          drinksHTML += `<div class="receipt-row"><span> 1x Copo 400ml (${j.flavor})</span><span>R$ 6,00</span></div>`;
+          drinksHTML += `<div style="font-size:0.75rem;">   • Açúcar: ${j.sugar}</div>`;
+        });
+
+        order.juices.Jarra.forEach((j) => {
+          drinksHTML += `<div class="receipt-row"><span> 1x Jarra 1L (${j.flavor})</span><span>R$ 14,00</span></div>`;
+          drinksHTML += `<div style="font-size:0.75rem;">   • Açúcar: ${j.sugar}</div>`;
+        });
+
+        order.sodas.Lata.forEach((s) => {
+          drinksHTML += `<div class="receipt-row"><span> 1x Lata 350ml (${s.brand})</span><span>R$ 6,00</span></div>`;
+        });
+
+        order.sodas.Litro.forEach((s) => {
+          drinksHTML += `<div class="receipt-row"><span> 1x 1 Litro (${s.brand})</span><span>R$ 10,00</span></div>`;
+        });
+      }
+
+      const receiptHTML = `
+        <div class="receipt-header">
+          <div style="font-weight:bold; font-size:1.1rem;">FORTIM MARMITARIA</div>
+          <div>Comanda de Produção</div>
+        </div>
+        <div class="receipt-row">
+          <span>PEDIDO: #${String(orderNum).padStart(3, '0')}</span>
+          <span>${dateStr}</span>
+        </div>
+        <div>LOCAL: <strong>${order.local}</strong></div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-row"><span><strong>MARMITA ${order.size}</strong></span><span>R$ ${order.sizePrice.toFixed(2)}</span></div>
+        <div> • MISTURA: <strong>${order.protein.toUpperCase()}</strong></div>
+        ${order.protein === 'Carne' ? `<div> • PONTO: <strong>${order.meatDoneness.toUpperCase()}</strong></div>` : ''}
+        <div class="receipt-divider"></div>
+        <div><strong>ACOMPANHAMENTOS:</strong></div>
+        ${sidesHTML}
+        ${extrasHTML ? `<div class="receipt-divider"></div><div><strong>EXTRAS & PORÇÕES:</strong></div>${extrasHTML}` : ''}
+        ${drinksHTML ? `<div class="receipt-divider"></div>${drinksHTML}` : ''}
+        ${order.obs ? `<div class="receipt-divider"></div><div><strong>OBS:</strong> ${order.obs}</div>` : ''}
+        <div class="receipt-divider"></div>
+        <div class="receipt-row receipt-total"><span>TOTAL:</span><span>R$ ${calculateTotal().toFixed(2).replace('.', ',')}</span></div>
+        <div style="text-align:center; margin-top:8px; font-size:0.75rem;">--- FIM DA COMANDA ---</div>
+      `;
+
+      document.getElementById('receipt-content').innerHTML = receiptHTML;
+      document.getElementById('modal-overlay').style.display = 'flex';
+    }
+
+    function confirmAndReset() {
+      orderNum++;
+      order = {
+        local: 'Mesa 01',
+        size: null,
+        sizePrice: 0,
+        quota: 0,
+        protein: null,
+        meatDoneness: 'Mal passado',
+        sides: { 'Arroz': 0, 'Feijão': 0, 'Macarrão': 0, 'Salada': 0, 'Farofa': 0 },
+        extras: { 
+          'Batata Frita': 0, 
+          'Ovo Frito': 0,
+          'Porção Arroz': 0,
+          'Porção Feijão': 0,
+          'Porção Macarrão': 0,
+          'Porção Salada': 0,
+          'Porção Farofa': 0
+        },
+        juices: { Copo: [], Jarra: [] },
+        sodas: { Lata: [], Litro: [] },
+        obs: ''
+      };
+
+      document.getElementById('obs-input').value = '';
+      document.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+      document.querySelector('#step-1 .btn-option').classList.add('selected');
+      
+      document.getElementById('ponto-carne-panel').classList.remove('active');
+      document.getElementById('juices-copo-container').innerHTML = '';
+      document.getElementById('juices-jarra-container').innerHTML = '';
+      document.getElementById('sodas-lata-container').innerHTML = '';
+      document.getElementById('sodas-litro-container').innerHTML = '';
+
+      const step4 = document.getElementById('step-4');
+      step4.classList.add('locked-section');
+      let overlay = document.getElementById('locked-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'locked-overlay';
+        overlay.className = 'locked-overlay';
+        overlay.onclick = handleLockedClick;
+        overlay.innerHTML = '🔒 Selecione o tamanho da marmita no Passo 2 primeiro';
+        step4.prepend(overlay);
+      } else {
+        overlay.style.display = 'flex';
+      }
+
+      for (let item in order.sides) {
+        document.getElementById(`count-${item}`).innerText = '0';
+      }
+      document.getElementById('count-extra-Batata').innerText = '0';
+      document.getElementById('count-extra-Ovo').innerText = '0';
+      document.getElementById('count-extra-Porção Arroz').innerText = '0';
+      document.getElementById('count-extra-Porção Feijão').innerText = '0';
+      document.getElementById('count-extra-Porção Macarrão').innerText = '0';
+      document.getElementById('count-extra-Porção Salada').innerText = '0';
+      document.getElementById('count-extra-Porção Farofa').innerText = '0';
+      document.getElementById('count-juice-Copo').innerText = '0';
+      document.getElementById('count-juice-Jarra').innerText = '0';
+      document.getElementById('count-soda-Lata').innerText = '0';
+      document.getElementById('count-soda-Litro').innerText = '0';
+
+      updateQuotaUI();
+      updateTotal();
+      validateForm();
+
+      document.getElementById('modal-overlay').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
